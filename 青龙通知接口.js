@@ -142,7 +142,7 @@ router.post('/api/qinglongMessage', async (req, res) => {
                                 if (startTime['$d'].getTime() > nowDate.getTime()) { // 判断定时是否大于当前时间
                                     startTime = startTime.subtract(timer_before, 'second');
                                     const cron = startTime.format('s m H D M *');
-                                    await sysMethod.inline(`spy定时插队 ${cron} ${urlMatch}`);
+                                    await sysMethod.inline(`spy定时插队 ${cron} ${url}`);
                                     await SpyIsValid.set(activityId, startTime['$d'].getTime());
                                     message += '\n\nBncr设置定时：' + cron;
                                 }
@@ -156,7 +156,7 @@ router.post('/api/qinglongMessage', async (req, res) => {
                         if (!actCron) {
                             let startTime = dayjs().startOf('day').add(1, 'day').subtract(timer_before, 'second');
                             let cron = startTime.format('s m H D M *');
-                            await sysMethod.inline(`spy定时任务 ${cron} ${urlMatch}`);
+                            await sysMethod.inline(`spy定时任务 ${cron} ${url}`);
                             await SpyIsValid.set(activityId, startTime['$d'].getTime());
                             message += '\n\nBncr设置定时：' + cron;
                         }
@@ -171,7 +171,7 @@ router.post('/api/qinglongMessage', async (req, res) => {
                             if (rlt) {
                                 let startTime = dayjs(rlt.slice(-16) + ':00').subtract(timer_before, 'second');
                                 let cron = startTime.format('s m H D M *');
-                                await sysMethod.inline(`spy定时任务 ${cron} ${urlMatch}`);
+                                await sysMethod.inline(`spy定时任务 ${cron} ${url}`);
                                 await SpyIsValid.set(activityId, startTime['$d'].getTime());
                                 message += '\n\nBncr设置定时：' + cron;
                             }
